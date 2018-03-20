@@ -19,6 +19,14 @@ melted = pd.melt(df, id_vars = ['country', 'year'], value_vars = ['m014', 'm1524
 # Print melted table
 print(melted.head())
 
+# Pivot table on variable column and create new 'sex' column
+melted['sex'] = melted.variable.str[0]
+print(melted.head())
+
+pivot = melted.pivot_table(values = 'value', index = ['country', 'year'], columns = 'variable', aggfunc = np.mean).reset_index()
+pivot = pivot.rename({'m014':'0 to 14', 'm1524':'15 to 24', 'm2534':'25 to 34', 'm3544':'35 to 44'}, axis = 'columns')
+print(pivot.head())
+
 # # Melt age and sex columns into new table
 # melted = pd.melt(df, id_vars = ['country', 'year'], value_vars = ['m014', 'm1524'], value_name = 'value')
 # print(melted.head())
