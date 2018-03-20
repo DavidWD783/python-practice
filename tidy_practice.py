@@ -25,11 +25,3 @@ pivoted = melted.pivot_table(values = 'value', index = ['country', 'year', 'sex'
 pivoted = pivoted.reset_index()
 pivoted = pivoted.rename({'m014':'Age 0 to 14', 'm1524':'Age 15 to 24'}, axis='columns')
 print(pivoted.head())
-
-# Add new comment
-# Add another new comment
-# Add another new comment
-# Add comment
-# Add another practice comment
-# Added yet another practice comment
-# Added comment on new branch practice 1
