@@ -13,15 +13,21 @@ urlretrieve(url, 'tb.csv')
 df = pd.read_csv(url, sep=',')
 # print(df.head())
 
-# Melt age and sex columns into new table
-melted = pd.melt(df, id_vars = ['country', 'year'], value_vars = ['m014', 'm1524'], value_name = 'value')
+# Melt age columns from 0 to 44, then pivot to split
+melted = pd.melt(df, id_vars = ['country', 'year'], value_vars = ['m014', 'm1524', 'm2534', 'm3544'], value_name = 'value')
+
+# Print melted table
 print(melted.head())
 
-# Create new column for sex using string value from variable
-melted['sex'] = melted.variable[0][0]
+# # Melt age and sex columns into new table
+# melted = pd.melt(df, id_vars = ['country', 'year'], value_vars = ['m014', 'm1524'], value_name = 'value')
+# print(melted.head())
 
-# Pivot table on m014 and m1524
-pivoted = melted.pivot_table(values = 'value', index = ['country', 'year', 'sex'], columns = 'variable', aggfunc = np.mean)
-pivoted = pivoted.reset_index()
-pivoted = pivoted.rename({'m014':'Age 0 to 14', 'm1524':'Age 15 to 24'}, axis='columns')
-print(pivoted.head())
+# # Create new column for sex using string value from variable
+# melted['sex'] = melted.variable[0][0]
+
+# # Pivot table on m014 and m1524
+# pivoted = melted.pivot_table(values = 'value', index = ['country', 'year', 'sex'], columns = 'variable', aggfunc = np.mean)
+# pivoted = pivoted.reset_index()
+# pivoted = pivoted.rename({'m014':'Age 0 to 14', 'm1524':'Age 15 to 24'}, axis='columns')
+# print(pivoted.head())
